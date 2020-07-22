@@ -15,6 +15,12 @@ in pkgs.mkShell rec {
     bashInteractive
     nixfmt
     python38
+    python38Packages.pip
+
+    python38Packages.setuptools
+    python38Packages.wheel
+    python38Packages.localstack
+
     pulumi-bin
   ];
 
