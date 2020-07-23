@@ -3,7 +3,7 @@ let
 
   pythonOverlay = (self: super:
     let
-      localstackOverlay = {
+      pythonStack = {
         # TODO move it somewhere else - i.e. python_overlay.nix
         packageOverrides = self: super: rec {
           awsume = super.buildPythonApplication rec {
@@ -26,6 +26,52 @@ let
             src = super.fetchPypi {
               inherit pname version;
               sha256 = "wSuVxeVfZjwhgk964jO7xB/6QYoAT3ORmDUBRBjaHW0=";
+            };
+          };
+          flask_cors = super.buildPythonPackage rec {
+            pname = "Flask-Cors";
+            version = "3.0.8";
+            doCheck = false;
+            propagatedBuildInputs = with pkgs.python38Packages; [ setuptools six flask ];
+            src = super.fetchPypi {
+              inherit pname version;
+              sha256 = "chcEI+tGEvCEcxiv/4wkezi9UWt3N638ENHCzbs4LRY=";
+            };
+          };
+          hypercorn = super.buildPythonPackage rec {
+            pname = "Hypercorn";
+            version = "0.10.2";
+            doCheck = false;
+            propagatedBuildInputs = with pkgs.python38Packages; [ 
+              setuptools
+              toml
+              wsproto
+              priority
+              typing-extensions
+              h2
+            ];
+            src = super.fetchPypi {
+              inherit pname version;
+              sha256 = "GfMucmciXIEIrVhbLF3t3x/nWVB5eg6HpoKjoA7xr5U="; 
+            };
+          };
+          quart = super.buildPythonPackage rec {
+            pname = "Quart";
+            version = "0.13.0";
+            doCheck = false;
+            propagatedBuildInputs = with pkgs.python38Packages; [ 
+              setuptools 
+              blinker 
+              toml 
+              werkzeug 
+              hypercorn 
+              aiofiles
+              jinja2
+              click
+            ];
+            src = super.fetchPypi {
+              inherit pname version;
+              sha256 = "sqjPDPGwEpzZgezprjBK2XfR3K7JKVIwO9GFJQhxfUQ="; 
             };
           };
           localstack-client = super.buildPythonPackage rec {
@@ -65,13 +111,20 @@ let
               pkgs.python38Packages.requests
               pkgs.python38Packages.dnspython
             ];
+            preBuild = ''
+              mkdir -p $out/.home
+              export HOME="$out/.home"
+            '';
+            postInstall = ''
+              $out/bin/localstack start --host
+            '';
             src = super.fetchPypi {
               inherit pname version;
               sha256 = "Zo7wbimlUxLL8ZwQqDlJUe1L41EH+4jVyOAOItHG1JU=";
             };
           };
 
-          pulumi = super.buildPythonApplication rec {
+          pulumi = super.buildPythonPackage rec {
             pname = "pulumi";
             version = "2.7.1";
             doCheck = false;
@@ -84,13 +137,13 @@ let
             };
           };
 
-          # traverse folder
+          # TODO traverse folder
           simple-python-lambda =
             let app = super.callPackage ../infra/simple-lambda-python { };
             in if pkgs.lib.inNixShell then app.stdenv else app;
         };
       };
-    in { python38 = super.python38.override (localstackOverlay); });
+    in { python38 = super.python38.override (pythonStack); });
 
   passthrough = self: super: rec { rootFolder = toString ../.; };
 

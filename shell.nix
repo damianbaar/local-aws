@@ -12,6 +12,8 @@ let
 in pkgs.mkShell rec {
   NAME = "playground";
   NIX_SHELL_NAME = "${NAME}#λ";
+  NIX_CFLAGS_COMPILE = "-I${pkgs.cyrus_sasl}/include/sasl";
+
   venvDir = ./.venv;
 
   buildInputs = with pkgs; [
@@ -35,16 +37,19 @@ in pkgs.mkShell rec {
     python38Packages.pulumi
     python38Packages.pylint
     python38Packages.venvShellHook
+    python38Packages.supervisor
     python38Packages.awsume
+    python38Packages.moto
+    # localstack
+    python38Packages.flask_cors
+    python38Packages.h11
+    python38Packages.quart
+    python38Packages.amazon_kclpy
+    cyrus_sasl
 
     python38Packages.simple-python-lambda
-    # supervisord
+    pulumi-bin
   ];
-
-  postVenvCreation = ''
-    unset SOURCE_DATE_EPOCH
-    pip install -r requirements.txt
-  '';
 
   shellHook = ''
     ${venv}
