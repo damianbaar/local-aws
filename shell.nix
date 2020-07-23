@@ -6,20 +6,21 @@ let
   '';
 
   venv = ''
-    alias pip="PIP_PREFIX='$(pwd)/_build/pip_packages' \pip"
-    export PYTHONPATH="$(pwd)/_build/pip_packages/lib/python3.8/site-packages:$PYTHONPATH"
     unset SOURCE_DATE_EPOCH
   '';
 
 in pkgs.mkShell rec {
   NAME = "playground";
   NIX_SHELL_NAME = "${NAME}#λ";
+  venvDir = ./.venv;
 
   buildInputs = with pkgs; [
     cowsay
     hello
     bashInteractive
     nixfmt
+
+    awscli
 
     dhall
     dhall-json
@@ -31,10 +32,16 @@ in pkgs.mkShell rec {
     python38Packages.localstack
     python38Packages.flask
     python38Packages.pulumi
-    # python38Packages.flask_swagger
+    python38Packages.pylint
+    python38Packages.venvShellHook
 
-    pulumi-bin
+    python38Packages.simple-python-lambda
   ];
+
+  postVenvCreation = ''
+    unset SOURCE_DATE_EPOCH
+    pip install -r requirements.txt
+  '';
 
   shellHook = ''
     ${venv}

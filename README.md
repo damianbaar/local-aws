@@ -13,5 +13,6 @@ after that `lorri shell` or `nix-shell` and you are ready to go!
 * [`localstack`](https://github.com/localstack/localstack)
 
 ### To learn
+* https://github.com/NixOS/nixpkgs/blob/master/doc/languages-frameworks/python.section.md
 * https://thomazleite.com/posts/development-with-nix-python/
 * https://overflowed.dev/blog/how-to-deploy-localstack-with-pulumi/

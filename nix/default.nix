@@ -31,6 +31,7 @@ let
               sha256 = "m2AL3wFEgT+BxAmCEOS+CM3kPi6BmAkvZ5P4qhdFkes=";
             };
           };
+
           localstack = super.buildPythonApplication rec {
             pname = "localstack";
             version = "0.11.3";
@@ -63,10 +64,14 @@ let
               sha256 = "4Hyl1OVm5G0iWYDRQs1DeWs0AnlfxNUrmNgWPIrjwGQ=";
             };
           };
+
+          # traverse folder
+          simple-python-lambda = super.callPackage ../infra/simple-python-lambda {};
+
         };
       };
     in {
-      python38 = super.python38.override localstackOverlay;
+      python38 = super.python38.override (localstackOverlay);
     });
 
   passthrough = self: super: rec { rootFolder = toString ../.; };
