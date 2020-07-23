@@ -1,19 +1,16 @@
-{ sources ? import ./sources.nix
-, system ? null
-}:
+{ sources ? import ./sources.nix, system ? null }:
 let
-  
+
   pythonOverlay = (self: super:
     let
-      extraLibs = {
+      localstackOverlay = {
+        # TODO move it somewhere else - i.e. python_overlay.nix
         packageOverrides = self: super: rec {
           localstack-client = super.buildPythonPackage rec {
             pname = "localstack-client";
             version = "0.24";
             doCheck = false;
-            propagatedBuildInputs = [ 
-              pkgs.python38Packages.boto3 
-            ];
+            propagatedBuildInputs = [ pkgs.python38Packages.boto3 ];
             src = super.fetchPypi {
               inherit pname version;
               sha256 = "m+Pr5+xx3oTVRKV+gebAMkruoBADKL32Ukg1w/ToeAs=";
@@ -23,7 +20,7 @@ let
             pname = "localstack-ext";
             version = "0.11.28";
             doCheck = false;
-            propagatedBuildInputs = [ 
+            propagatedBuildInputs = [
               pkgs.python38Packages.requests
               pkgs.python38Packages.dnspython
               pkgs.python38Packages.pyaes
@@ -38,8 +35,8 @@ let
             pname = "localstack";
             version = "0.11.3";
             doCheck = false;
-            propagatedBuildInputs = [ 
-              localstack-client 
+            propagatedBuildInputs = [
+              localstack-client
               localstack-ext
               pkgs.python38Packages.docopt
               pkgs.python38Packages.requests
@@ -50,23 +47,38 @@ let
               sha256 = "Zo7wbimlUxLL8ZwQqDlJUe1L41EH+4jVyOAOItHG1JU=";
             };
           };
+
+          pulumi = super.buildPythonPackage rec {
+            pname = "pulumi";
+            version = "2.7.1";
+            doCheck = false;
+            propagatedBuildInputs = with pkgs.python38Packages; [
+              grpcio
+              dill
+            ];
+            format = "wheel";
+            src = super.fetchPypi {
+              inherit pname version;
+              format = "wheel";
+              sha256 = "4Hyl1OVm5G0iWYDRQs1DeWs0AnlfxNUrmNgWPIrjwGQ=";
+            };
+          };
         };
       };
     in {
-      python38 = super.python38.override extraLibs;
-    }
-  );
+      python38 = super.python38.override localstackOverlay;
+    });
 
-  passthrough = self: super: rec {
-    rootFolder = toString ../.;
-  };
+  passthrough = self: super: rec { rootFolder = toString ../.; };
 
-  overlays = [
-    passthrough
+  overlays = [ 
+    passthrough 
     pythonOverlay
   ];
 
-  args = { inherit overlays; } // {
+  args = {
+    inherit overlays;
+  } // {
     inherit overlays;
   } // (if system != null then { inherit system; } else { });
 
