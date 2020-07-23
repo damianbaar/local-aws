@@ -20,6 +20,9 @@ in pkgs.mkShell rec {
     hello
     bashInteractive
     nixfmt
+
+    dhall
+    dhall-json
     python38
     python38Packages.pip
 

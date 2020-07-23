@@ -31,7 +31,7 @@ let
               sha256 = "m2AL3wFEgT+BxAmCEOS+CM3kPi6BmAkvZ5P4qhdFkes=";
             };
           };
-          localstack = super.buildPythonPackage rec {
+          localstack = super.buildPythonApplication rec {
             pname = "localstack";
             version = "0.11.3";
             doCheck = false;
@@ -48,7 +48,7 @@ let
             };
           };
 
-          pulumi = super.buildPythonPackage rec {
+          pulumi = super.buildPythonApplication rec {
             pname = "pulumi";
             version = "2.7.1";
             doCheck = false;
