@@ -20,6 +20,7 @@ in pkgs.mkShell rec {
     bashInteractive
     nixfmt
 
+    nodejs-14_x
     awscli
 
     dhall
@@ -34,8 +35,10 @@ in pkgs.mkShell rec {
     python38Packages.pulumi
     python38Packages.pylint
     python38Packages.venvShellHook
+    python38Packages.awsume
 
     python38Packages.simple-python-lambda
+    # supervisord
   ];
 
   postVenvCreation = ''

@@ -3,7 +3,9 @@ with python38Packages;
   buildPythonPackage rec {
     pname = "simple-python-lambda";
     version = "0.0.1";
-    doCheck = false;
+    checkPhase = ''
+      python -m unittest tests/*.py
+    '';
     propagatedBuildInputs = [ pulumi ];
     src = ./.;
   }

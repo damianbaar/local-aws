@@ -6,6 +6,28 @@ let
       localstackOverlay = {
         # TODO move it somewhere else - i.e. python_overlay.nix
         packageOverrides = self: super: rec {
+          awsume = super.buildPythonApplication rec {
+            pname = "awsume";
+            version = "4.4.1";
+            doCheck = false;
+            propagatedBuildInputs = with pkgs.python38Packages; [
+              setuptools
+              pyyaml
+              pluggy
+              colorama
+              boto3
+              psutil
+            ];
+            preBuild = ''
+              mkdir -p $out/.home
+              export HOME="$out/.home"
+              touch $out/.home/.bash_profile
+            '';
+            src = super.fetchPypi {
+              inherit pname version;
+              sha256 = "wSuVxeVfZjwhgk964jO7xB/6QYoAT3ORmDUBRBjaHW0=";
+            };
+          };
           localstack-client = super.buildPythonPackage rec {
             pname = "localstack-client";
             version = "0.24";
@@ -53,10 +75,7 @@ let
             pname = "pulumi";
             version = "2.7.1";
             doCheck = false;
-            propagatedBuildInputs = with pkgs.python38Packages; [
-              grpcio
-              dill
-            ];
+            propagatedBuildInputs = with pkgs.python38Packages; [ grpcio dill ];
             format = "wheel";
             src = super.fetchPypi {
               inherit pname version;
@@ -66,20 +85,16 @@ let
           };
 
           # traverse folder
-          simple-python-lambda = super.callPackage ../infra/simple-python-lambda {};
-
+          simple-python-lambda =
+            let app = super.callPackage ../infra/simple-lambda-python { };
+            in if pkgs.lib.inNixShell then app.stdenv else app;
         };
       };
-    in {
-      python38 = super.python38.override (localstackOverlay);
-    });
+    in { python38 = super.python38.override (localstackOverlay); });
 
   passthrough = self: super: rec { rootFolder = toString ../.; };
 
-  overlays = [ 
-    passthrough 
-    pythonOverlay
-  ];
+  overlays = [ passthrough pythonOverlay ];
 
   args = {
     inherit overlays;
