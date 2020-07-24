@@ -4,7 +4,6 @@ POC to spinup `localstack` and some deployment tools (i.e. `aws-cdk`) - to have 
 #### Prerequisites
 * install [`nix`](https://nixos.org/download.html)
 * install [`direnv`](https://direnv.net/)
-* install [`lorri`](https://github.com/target/lorri)
 
 after that `lorri shell` or `nix-shell` and you are ready to go!
 

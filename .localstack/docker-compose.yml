@@ -1,0 +1,15 @@
+version: '3.2'
+services:
+  localstack:
+    image: localstack/localstack:0.11.3
+    container_name: localstack_demo
+    ports:
+      - '4563-4599:4563-4599'
+      - '8055:8080'
+    environment:
+      - SERVICES=s3,lambda,apigateway
+      - DEBUG=1
+      - DATA_DIR=/tmp/localstack/data
+    volumes:
+      - './.localstack/cache:/tmp/localstack'
+      - '/var/run/docker.sock:/var/run/docker.sock'

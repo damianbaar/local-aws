@@ -6,17 +6,22 @@ let
   '';
 
   start-localstack = pkgs.writeScriptBin "start-local-stack" ''
-    MAIN_CONTAINER_NAME=dupa LOCALSTACK_DOCKER_NAME=dupa USE_LIGHT_IMAGE=0 ENTRYPOINT=-d ${pkgs.python38Packages.localstack}/bin/localstack start --docker
+    ${pkgs.docker-compose}/bin/docker-compose -f .localstack/docker-compose.yml up -d
   '';
 
   stop-localstack = pkgs.writeScriptBin "stop-local-stack" ''
-    ${pkgs.docker}/bin/docker stop localstack_main
+    ${pkgs.docker-compose}/bin/docker-compose -f .localstack/docker-compose.yml kill
   '';
+
+  pythonEnv = pkgs.python38.withPackages (ps: with ps; [
+    setuptools
+    wheel
+    pip
+  ]);
 
 in pkgs.mkShell rec {
   NAME = "playground";
   NIX_SHELL_NAME = "${NAME}#λ";
-  NIX_CFLAGS_COMPILE = "-I${pkgs.cyrus_sasl}/include/sasl";
 
   venvDir = "./.venv";
 
@@ -26,48 +31,35 @@ in pkgs.mkShell rec {
     bashInteractive
     nixfmt
 
-    nodejs-14_x
-    awscli
+    nodejs-13_x
+    pythonEnv
+    python38Packages.venvShellHook
 
     dhall
     dhall-json
     python38
-    python38Packages.pip
-    python38Packages.venvShellHook
-    python38Packages.setuptools
-    python38Packages.wheel
-    python38Packages.psutil
-    python38Packages.localstack
-    # python38Packages.flask
-    # python38Packages.pulumi
-    # python38Packages.pylint
-    # python38Packages.supervisor
-    # python38Packages.awsume
-    # localstack
-    # python38Packages.moto
-    # python38Packages.flask_cors
-    # python38Packages.h11
-    # python38Packages.quart
-    # python38Packages.amazon_kclpy
-    cyrus_sasl
+    awscli
 
-    python38Packages.simple-python-lambda
-    pulumi-bin
+    pkgs.nixpkgs-unstable.pulumi-bin
 
     start-localstack
     stop-localstack
 
     jq
+
+    bazel
+    bazel-watcher
+    bazel-buildtools
   ];
 
+  # INFO: to enable auto-completion in IDE
   postVenvCreation = ''
     unset SOURCE_DATE_EPOCH
-    pip install -r requirements.txt
-
-    ${bootstrap}
+    python -m pip install -r ${./python-infra-bazel-deps.txt}
   '';
 
   postShellHook = ''
+    ${bootstrap}
     unset SOURCE_DATE_EPOCH
   '';
 }
