@@ -1,5 +1,8 @@
 {
   "nixfmt.path": "/nix/store/5brx4y0hqdh11z80njvdnyvrnq6m122f-nixfmt-0.4.0/bin/nixfmt",
-  "python.linting.pylintPath": "/nix/store/chp310kx9ynyxdnmkapv3lil4s9x100l-python3.8-pylint-2.5.2/bin/pylint",
-  "python.pythonPath": "/nix/store/0hi6adsig2nnp0dxw4wdiswlqfamqvfs-python3-3.8.2/bin/python"
+  "python.linting.pylintPath": ".venv/bin/pylint",
+  "python.autoComplete.extraPaths": [
+    ".venv/lib"
+  ],
+  "python.pythonPath": ".venv/bin/python3.8"
 }

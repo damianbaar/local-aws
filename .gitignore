@@ -3,5 +3,6 @@
 .temp
 *.log
 *.pid
+.pulumi/**
 bazel-*
 .localstack/cache/**

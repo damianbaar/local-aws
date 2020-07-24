@@ -21,6 +21,10 @@ let
       s3 mb s3://$1
   '';
 
+  init-infra-local-state = pkgs.writeScriptBin "init-infra-local-state" ''
+    pulumi login file://${pkgs.rootFolder}
+  '';
+
   pythonEnv = pkgs.python38.withPackages (ps: with ps; [
     setuptools
     wheel
@@ -36,6 +40,7 @@ let
     start-localstack
     stop-localstack
     create-s3-bucket
+    init-infra-local-state
   ];
 
 in pkgs.mkShell rec {
