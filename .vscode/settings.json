@@ -4,5 +4,5 @@
   "python.autoComplete.extraPaths": [
     ".venv/lib"
   ],
-  "python.pythonPath": ".venv/bin/python3.8"
+  "python.pythonPath": ".venv/bin/python3.7"
 }

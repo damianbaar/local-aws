@@ -29,13 +29,13 @@ let
     cd $1 && pipenv run pulumi up
   '';
 
-  pythonEnv = pkgs.python38.withPackages (ps: with ps; [
+  pythonEnv = pkgs.python37.withPackages (ps: with ps; [
     setuptools
     wheel
     pip
   ]);
 
-  unstable = with pkgs.nixpkgs-unstable.python38Packages; [
+  unstable = with pkgs.nixpkgs-unstable.python37Packages; [
     pip
     venvShellHook
   ];
@@ -67,7 +67,7 @@ in pkgs.mkShell rec {
     dhall-json
 
     pythonEnv
-    python38
+    python37
     awscli
 
     pipenv

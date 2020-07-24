@@ -7,7 +7,7 @@ let
         pname = "awsume";
         version = "4.4.1";
         doCheck = false;
-        propagatedBuildInputs = with self.python38Packages; [
+        propagatedBuildInputs = with self.python37Packages; [
           setuptools
           pyyaml
           pluggy
@@ -27,4 +27,4 @@ let
       };
     };
   };
-in { python38 = super.python38.override (pythonStack); }
+in { python37 = super.python37.override (pythonStack); }
