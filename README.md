@@ -28,3 +28,6 @@ When you enter in the directory, direnv will automatically trigger the script in
 * https://github.com/NixOS/nixpkgs/blob/master/doc/languages-frameworks/python.section.md
 * https://thomazleite.com/posts/development-with-nix-python/
 * https://overflowed.dev/blog/how-to-deploy-localstack-with-pulumi/
+
+### TODO
+* introduce more meaningful python `requirements` files

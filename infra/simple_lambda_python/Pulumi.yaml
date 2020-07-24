@@ -1,5 +1,5 @@
 name: simple_python_lambda
+main: main.py
 runtime:
   name: python
-  main: main.py
 description: A minimal Python Pulumi program

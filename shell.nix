@@ -19,6 +19,10 @@ let
     ${pkgs.awscli}/bin/aws \
       --endpoint-url $endpoint \
       s3 mb s3://$1
+  ''; 
+
+  refresh-deps = pkgs.writeScriptBin "refresh-deps" ''
+    pipenv install -r python-infra-bazel-deps.txt
   '';
 
   init-infra-local-state = pkgs.writeScriptBin "init-infra-local-state" ''
@@ -33,6 +37,7 @@ let
     setuptools
     wheel
     pip
+    autopep8
   ]);
 
   unstable = with pkgs.nixpkgs-unstable.python37Packages; [
@@ -40,12 +45,14 @@ let
     venvShellHook
   ];
 
+  # TODO create new stack
   local-scripts = [
     start-localstack
     stop-localstack
     create-s3-bucket
     init-infra-local-state
     run-stack
+    refresh-deps
   ];
 
 in pkgs.mkShell rec {
@@ -83,7 +90,7 @@ in pkgs.mkShell rec {
   # INFO: to enable auto-completion in IDE
   postVenvCreation = ''
     unset SOURCE_DATE_EPOCH
-    pipenv install -r python-infra-bazel-deps.txt
+    ${refresh-deps}/bin/refresh-deps
   '';
 
   postShellHook = ''
