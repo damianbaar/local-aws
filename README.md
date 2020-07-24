@@ -10,13 +10,18 @@ POC to spinup `localstack` and some deployment tools (i.e. `aws-cdk`) - to have 
 
 ### Startup
 `localstack` is used to provide ability to test things without dependency on internet any any costs.
-> you can find couple of helpers to manage the local environment, this is, `start-localstack` & `stop-localstack`
-
 ## Folder structure
 * TODO
 
 ## Commands
 Helper commands to be run everywhere.
+
+### Environment initialization
+* to start all necessary processes for running local environment, go with `start-environment` 
+
+### Localstack
+* `start-localstack` - run `localstack` instance thru `docker-compose`
+* `stop-localstack` - kill `localstack` instance thru `docker-compose`
 
 ### AWS
 * to create bucket run `create-s3-bucket <your_bucket_name>`, i.e. `create-s3-bucket my-bucket`

@@ -6,15 +6,17 @@ let
   '';
 
   start-localstack = pkgs.writeScriptBin "start-local-stack" ''
-    ${pkgs.docker-compose}/bin/docker-compose -f .localstack/docker-compose.yml up -d
+    ${pkgs.docker-compose}/bin/docker-compose \
+      -f ${pkgs.rootFolder}/.localstack/docker-compose.yml up -d
   '';
 
   stop-localstack = pkgs.writeScriptBin "stop-local-stack" ''
-    ${pkgs.docker-compose}/bin/docker-compose -f .localstack/docker-compose.yml kill
+    ${pkgs.docker-compose}/bin/docker-compose \
+      -f ${pkgs.rootFolder}/.localstack/docker-compose.yml kill
   '';
 
   create-s3-bucket = pkgs.writeScriptBin "create-s3-bucket" ''
-    endpoint=$(${pkgs.jq}/bin/jq '.S3' .localstack/endpoints.json)
+    endpoint=$(${pkgs.jq}/bin/jq '.S3' ${pkgs.rootFolder}/.localstack/endpoints.json)
 
     ${pkgs.awscli}/bin/aws \
       --endpoint-url $endpoint \
@@ -22,15 +24,20 @@ let
   ''; 
 
   refresh-deps = pkgs.writeScriptBin "refresh-deps" ''
-    pipenv install -r python-infra-bazel-deps.txt
+    ${pkgs.pipenv}/bin/pipenv install -r python-infra-bazel-deps.txt
   '';
 
   init-infra-local-state = pkgs.writeScriptBin "init-infra-local-state" ''
-    pulumi login file://${pkgs.rootFolder}
+    ${pkgs.nixpkgs-unstable.pulumi-bin}/bin/pulumi login file://${pkgs.rootFolder}
   '';
 
   run-stack = pkgs.writeScriptBin "stack-up" ''
     cd $1 && pipenv run pulumi up
+  '';
+
+  start = pkgs.writeScriptBin "start-environment" ''
+    ${init-infra-local-state}/bin/init-infra-local-state
+    ${start-localstack}/bin/start-local-stack
   '';
 
   pythonEnv = pkgs.python37.withPackages (ps: with ps; [
@@ -47,6 +54,7 @@ let
 
   # TODO create new stack
   local-scripts = [
+    start
     start-localstack
     stop-localstack
     create-s3-bucket
