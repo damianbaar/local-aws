@@ -12,6 +12,12 @@ POC to spinup `localstack` and some deployment tools (i.e. `aws-cdk`) - to have 
 `localstack` is used to provide ability to test things without dependency on internet any any costs.
 > you can find couple of helpers to manage the local environment, this is, `start-localstack` & `stop-localstack`
 
+## Folder structure
+* TODO
+
+## Commands
+Helper commands to be run everywhere.
+
 ### AWS
 * to create bucket run `create-s3-bucket <your_bucket_name>`, i.e. `create-s3-bucket my-bucket`
 * to run infra stack run `stack-up <your_project>`, i.e. `stack-up infra/simple_lambda_python`
