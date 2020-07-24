@@ -25,6 +25,10 @@ let
     pulumi login file://${pkgs.rootFolder}
   '';
 
+  run-stack = pkgs.writeScriptBin "stack-up" ''
+    cd $1 && pipenv run pulumi up
+  '';
+
   pythonEnv = pkgs.python38.withPackages (ps: with ps; [
     setuptools
     wheel
@@ -41,11 +45,13 @@ let
     stop-localstack
     create-s3-bucket
     init-infra-local-state
+    run-stack
   ];
 
 in pkgs.mkShell rec {
   NAME = "playground";
   NIX_SHELL_NAME = "${NAME}#λ";
+  PIPENV_IGNORE_VIRTUALENVS=1;
 
   venvDir = "./.venv";
 
@@ -64,6 +70,7 @@ in pkgs.mkShell rec {
     python38
     awscli
 
+    pipenv
     pkgs.nixpkgs-unstable.pulumi-bin
 
     jq
@@ -76,7 +83,7 @@ in pkgs.mkShell rec {
   # INFO: to enable auto-completion in IDE
   postVenvCreation = ''
     unset SOURCE_DATE_EPOCH
-    pip install -r python-infra-bazel-deps.txt
+    pipenv install -r python-infra-bazel-deps.txt
   '';
 
   postShellHook = ''

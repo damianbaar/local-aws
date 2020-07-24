@@ -6,3 +6,4 @@
 .pulumi/**
 bazel-*
 .localstack/cache/**
+__pycache__

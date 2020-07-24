@@ -1,6 +1,5 @@
 name: simple_python_lambda
 runtime:
   name: python
-  options:
-    virtualenv: venv
+  main: main.py
 description: A minimal Python Pulumi program
