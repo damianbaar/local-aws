@@ -23,7 +23,6 @@ let
 
   pythonEnv = pkgs.python38.withPackages (ps: with ps; [
     setuptools
-    venvShellHook
     wheel
     pip
   ]);
@@ -45,6 +44,8 @@ in pkgs.mkShell rec {
     dhall
     dhall-json
 
+    python38Packages.venvShellHook
+    python38Packages.pip
     pythonEnv
     python38
     awscli

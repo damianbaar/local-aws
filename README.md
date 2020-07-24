@@ -12,6 +12,9 @@ POC to spinup `localstack` and some deployment tools (i.e. `aws-cdk`) - to have 
 `localstack` is used to provide ability to test things without dependency on internet any any costs.
 > you can find couple of helpers to manage the local environment, this is, `start-localstack` & `stop-localstack`
 
+### AWS
+* to create bucket run `create-s3-bucket <your_bucket_name>`
+
 #### What you will get
 * [`pulumi`](https://github.com/pulumi/pulumi)
 * [`localstack`](https://github.com/localstack/localstack)
