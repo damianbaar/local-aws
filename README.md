@@ -19,7 +19,13 @@ Helper commands to be run everywhere.
 ### Environment initialization
 * to start all necessary processes for running local environment, go with `start-environment` 
 
-### Localstack
+### Pulumi wrapper
+* `deployer <command> <folder>` - `deployer stack infra/simple_lambda_python`
+
+#### Updating `requirements`
+* `refresh-deps` - command to update `virtualenv`
+
+#### Localstack
 * `start-localstack` - run `localstack` instance thru `docker-compose`
 * `stop-localstack` - kill `localstack` instance thru `docker-compose`
 
@@ -31,6 +37,10 @@ Helper commands to be run everywhere.
 * [`pulumi`](https://github.com/pulumi/pulumi)
 * [`localstack`](https://github.com/localstack/localstack)
 
+### Building
+* `bazel build //infra/simple_lambda_python:main`
+
+### Internals
 #### How it works
 When you enter in the directory, direnv will automatically trigger the script inside .envrc.
 

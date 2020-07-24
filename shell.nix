@@ -32,7 +32,11 @@ let
   '';
 
   run-stack = pkgs.writeScriptBin "stack-up" ''
-    cd $1 && pipenv run pulumi up
+    ${pkgs.pipenv}/bin/pipenv run pulumi up --cwd $1
+  '';
+
+  run-pulumi = pkgs.writeScriptBin "deployer" ''
+    ${pkgs.pipenv}/bin/pipenv run pulumi $1 --cwd $2
   '';
 
   start = pkgs.writeScriptBin "start-environment" ''
@@ -52,9 +56,13 @@ let
     venvShellHook
   ];
 
-  # TODO create new stack
+  # TODO create pulumi new stack
+  # TODO create pulumi config set aws:region
+  # exactly the same as stack up
+
   local-scripts = [
     start
+    run-pulumi
     start-localstack
     stop-localstack
     create-s3-bucket
