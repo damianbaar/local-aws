@@ -14,7 +14,7 @@ let
   '';
 
   create-s3-bucket = pkgs.writeScriptBin "create-s3-bucket" ''
-    endpoint=$(${pkgs.jq}/bin/jq '.S3' .localstack/endpoints.json | tr -d '"')
+    endpoint=$(${pkgs.jq}/bin/jq '.S3' .localstack/endpoints.json)
 
     ${pkgs.awscli}/bin/aws \
       --endpoint-url $endpoint \
@@ -27,13 +27,24 @@ let
     pip
   ]);
 
+  unstable = with pkgs.nixpkgs-unstable.python38Packages; [
+    pip
+    venvShellHook
+  ];
+
+  local-scripts = [
+    start-localstack
+    stop-localstack
+    create-s3-bucket
+  ];
+
 in pkgs.mkShell rec {
   NAME = "playground";
   NIX_SHELL_NAME = "${NAME}#λ";
 
   venvDir = "./.venv";
 
-  buildInputs = with pkgs; [
+  buildInputs = with pkgs; unstable ++ local-scripts ++ [
     cowsay
     hello
     bashInteractive
@@ -44,17 +55,11 @@ in pkgs.mkShell rec {
     dhall
     dhall-json
 
-    python38Packages.venvShellHook
-    python38Packages.pip
     pythonEnv
     python38
     awscli
 
     pkgs.nixpkgs-unstable.pulumi-bin
-
-    start-localstack
-    stop-localstack
-    create-s3-bucket
 
     jq
 
@@ -66,7 +71,7 @@ in pkgs.mkShell rec {
   # INFO: to enable auto-completion in IDE
   postVenvCreation = ''
     unset SOURCE_DATE_EPOCH
-    python -m pip install -r ${./python-infra-bazel-deps.txt}
+    pip install -r python-infra-bazel-deps.txt
   '';
 
   postShellHook = ''
