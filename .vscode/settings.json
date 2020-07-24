@@ -1,4 +1,5 @@
 {
   "nixfmt.path": "/nix/store/5brx4y0hqdh11z80njvdnyvrnq6m122f-nixfmt-0.4.0/bin/nixfmt",
-  "python.linting.pylintPath": "/nix/store/chp310kx9ynyxdnmkapv3lil4s9x100l-python3.8-pylint-2.5.2/bin/pylint"
+  "python.linting.pylintPath": "/nix/store/chp310kx9ynyxdnmkapv3lil4s9x100l-python3.8-pylint-2.5.2/bin/pylint",
+  "python.pythonPath": "/Users/damianbaar/workspaces/playground/python/http-playground/.venv/bin/python3.8"
 }

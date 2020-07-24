@@ -104,19 +104,27 @@ let
             pname = "localstack";
             version = "0.11.3";
             doCheck = false;
-            propagatedBuildInputs = [
+
+            NIX_CFLAGS_COMPILE = "-I${pkgs.cyrus_sasl}/include/sasl";
+            nativeBuildInputs = [
+              pkgs.nodejs-14_x
+              pkgs.coreutils
+            ];
+            propagatedBuildInputs = with pkgs.python38Packages; [
               localstack-client
               localstack-ext
-              pkgs.python38Packages.docopt
-              pkgs.python38Packages.requests
-              pkgs.python38Packages.dnspython
+              docopt
+              requests
+              dnspython
+              moto
+              flask_cors
+              h11
+              quart
+              amazon_kclpy
             ];
             preBuild = ''
-              mkdir -p $out/.home
-              export HOME="$out/.home"
-            '';
-            postInstall = ''
-              $out/bin/localstack start --host
+              mkdir -p $out/local-home
+              export HOME="$out/local-home"
             '';
             src = super.fetchPypi {
               inherit pname version;
