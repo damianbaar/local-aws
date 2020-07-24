@@ -13,8 +13,17 @@ let
     ${pkgs.docker-compose}/bin/docker-compose -f .localstack/docker-compose.yml kill
   '';
 
+  create-s3-bucket = pkgs.writeScriptBin "create-s3-bucket" ''
+    endpoint=$(${pkgs.jq}/bin/jq '.S3' .localstack/endpoints.json | tr -d '"')
+
+    ${pkgs.awscli}/bin/aws \
+      --endpoint-url $endpoint \
+      s3 mb s3://$1
+  '';
+
   pythonEnv = pkgs.python38.withPackages (ps: with ps; [
     setuptools
+    venvShellHook
     wheel
     pip
   ]);
@@ -32,11 +41,11 @@ in pkgs.mkShell rec {
     nixfmt
 
     nodejs-13_x
-    pythonEnv
-    python38Packages.venvShellHook
 
     dhall
     dhall-json
+
+    pythonEnv
     python38
     awscli
 
@@ -44,6 +53,7 @@ in pkgs.mkShell rec {
 
     start-localstack
     stop-localstack
+    create-s3-bucket
 
     jq
 

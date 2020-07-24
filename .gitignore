@@ -4,3 +4,4 @@
 *.log
 *.pid
 bazel-*
+.localstack/cache/**
