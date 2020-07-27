@@ -68,6 +68,7 @@ let
     init-infra-local-state
     run-stack
     refresh-deps
+    build-infra-artifact
   ];
 
 in pkgs.mkShell rec {

@@ -1,4 +1,3 @@
-# encryptionsalt: v1:R9h44TBD9cA=:v1:b9bowwWUp7vK+08w:hn7uJdKZN8Tv06Irr/lcfBfK9qXr9w==
 encryptionsalt: v1:P/0dA8r4j7U=:v1:w7SjLhj0JMzJxz15:SOmBOmo1bTufN7Rkf4vkWW7HB3P9kg==
 config:
   aws:region: eu-west-1
