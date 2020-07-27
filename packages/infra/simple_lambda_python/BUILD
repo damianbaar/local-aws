@@ -5,7 +5,7 @@ package(default_visibility = ["//visibility:public"])
 
 py_library(
   name = "main",
-  srcs = ["src/main.py"],
+  srcs = glob(["src/*.py"]),
   deps = [
     requirement("pulumi"),
     requirement("pulumi_aws"),

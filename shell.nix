@@ -32,6 +32,7 @@ let
   '';
 
   run-stack = pkgs.writeScriptBin "stack-up" ''
+    ${build-infra-artifact}/bin/build-infra-artifact $1
     ${pkgs.pipenv}/bin/pipenv run pulumi up --cwd $1
   '';
 
@@ -44,8 +45,13 @@ let
     ${start-localstack}/bin/start-local-stack
   '';
 
+  build-infra-artifact = pkgs.writeScriptBin "build-infra-artifact" ''
+    mkdir -p $1/dist
+    ${pkgs.python37Packages.stickytape}/bin/stickytape $1/src/main.py > $1/dist/bundle.py
+  '';
+
   pythonEnv =
-    pkgs.python37.withPackages (ps: with ps; [ setuptools wheel pip autopep8 ]);
+    pkgs.python37.withPackages (ps: with ps; [ setuptools wheel pip autopep8 stickytape ]);
 
   unstable = with pkgs.nixpkgs-unstable.python37Packages; [ pip venvShellHook ];
 

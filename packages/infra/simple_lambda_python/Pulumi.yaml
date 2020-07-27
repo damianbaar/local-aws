@@ -1,5 +1,5 @@
 name: simple_python_lambda
-main: src/main.py
+main: dist/bundle.py
 runtime:
   name: python
 description: A minimal Python Pulumi program

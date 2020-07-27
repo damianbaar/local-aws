@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "8622ac2524ebee208725cd1e5677b080f1f6d7ac116d6c4e070dc412dce7350a"
+            "sha256": "b811f064dd808d172ba7725ae97d8f19975605ed639368716d9497e1f62e013f"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -16,6 +16,13 @@
         ]
     },
     "default": {
+        "altgraph": {
+            "hashes": [
+                "sha256:1f05a47122542f97028caf78775a095fbe6a2699b5089de8477eb583167d69aa",
+                "sha256:c623e5f3408ca61d4016f23a681b9adb100802ca3e3da5e718915a9e4052cebe"
+            ],
+            "version": "==0.17"
+        },
         "arpeggio": {
             "hashes": [
                 "sha256:948ce06163a48a72c97f4fe79ad3d1c1330b6fec4f22ece182fb60ef60bd022b",
@@ -142,6 +149,13 @@
             ],
             "version": "==1.4.3"
         },
+        "macholib": {
+            "hashes": [
+                "sha256:0c436bc847e7b1d9bda0560351bf76d7caf930fb585a828d13608839ef42c432",
+                "sha256:c500f02867515e6c60a27875b408920d18332ddf96b4035ef03beddd782d4281"
+            ],
+            "version": "==1.14"
+        },
         "mccabe": {
             "hashes": [
                 "sha256:ab8a6258860da4b6677da4bd2fe5dc2c659cff31b3ee4f7f5d64e79735b80d42",
@@ -264,6 +278,13 @@
             "index": "pypi",
             "version": "==1.4.1"
         },
+        "pyinstaller": {
+            "hashes": [
+                "sha256:3730fa80d088f8bb7084d32480eb87cbb4ddb64123363763cf8f2a1378c1c4b7"
+            ],
+            "index": "pypi",
+            "version": "==3.6"
+        },
         "pylint": {
             "hashes": [
                 "sha256:7dd78437f2d8d019717dbf287772d0b2dbdfd13fc016aa7faa08d67bccc46adc",
@@ -329,6 +350,14 @@
                 "sha256:8b74bedcbbbaca38ff6d7491d76f2b06b3592611af620f8426e82dddb04a5ced"
             ],
             "version": "==1.15.0"
+        },
+        "stickytape": {
+            "hashes": [
+                "sha256:5b619dd66d42635935a070d40d1190a1a327a9334051c73bc16d121468f1ee72",
+                "sha256:c432c95dc782ac96eaf6cec34f8d140576cca03a71eb94d6c743424f3305e774"
+            ],
+            "index": "pypi",
+            "version": "==0.1.14"
         },
         "tabulate": {
             "hashes": [

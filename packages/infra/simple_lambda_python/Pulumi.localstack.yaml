@@ -1,0 +1,39 @@
+# encryptionsalt: v1:R9h44TBD9cA=:v1:b9bowwWUp7vK+08w:hn7uJdKZN8Tv06Irr/lcfBfK9qXr9w==
+encryptionsalt: v1:P/0dA8r4j7U=:v1:w7SjLhj0JMzJxz15:SOmBOmo1bTufN7Rkf4vkWW7HB3P9kg==
+config:
+  aws:region: eu-west-1
+  aws:access_key:
+    secure: v1:JLkJ8nfyJhglkzfW:Bdw2mQ3rDEPTTaMB2lwCR2J0APM8+B0kz+lD
+  aws:secret_key:
+    secure: v1:IH+OQgAdx6swTHr2:0UFlGqtdGmzN0NcYG/lf4HohHe01D8C4TvKS
+  simple_python_lambda:debug: "true"
+  simple_python_lambda:domain: example.org
+  simple_python_lambda:email: admin@example.org
+  simple_python_lambda:endpoints: |-
+    {
+      "APIGateway": "http://localhost:4567",
+      "CloudFormation": "http://localhost:4581",
+      "CloudWatch":"http://localhost:4582",
+      "CloudWatchLogs":"http://localhost:4586",
+      "DynamoDB": "http://localhost:4569",
+      "DynamoDBStreams": "http://localhost:4570",
+      "Elasticsearch": "http://localhost:4571",
+      "ES": "http://localhost:4578",
+      "Firehose": "http://localhost:4573",
+      "IAM": "http://localhost:4593",
+      "Kinesis": "http://localhost:4568",
+      "KMS": "http://localhost:4584",
+      "Lambda": "http://localhost:4574",
+      "Redshift": "http://localhost:4577",
+      "Route53": "http://localhost:4580",
+      "StepFunctions": "http://localhost:4585",
+      "S3": "http://localhost:4572",
+      "SES": "http://localhost:4579",
+      "SNS": "http://localhost:4575",
+      "SQS": "http://localhost:4576",
+      "SSM": "http://localhost:4583",
+      "STS": "http://localhost:4592"
+    }
+  simple_python_lambda:name: simple_python_lambda
+  simple_python_lambda:provider: localstack
+  simple_python_lambda:stage: local

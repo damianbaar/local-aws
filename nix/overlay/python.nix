@@ -25,6 +25,16 @@ let
           sha256 = "wSuVxeVfZjwhgk964jO7xB/6QYoAT3ORmDUBRBjaHW0=";
         };
       };
+
+      stickytape = super.buildPythonApplication rec {
+        pname = "stickytape";
+        version = "0.1.14";
+        doCheck = false;
+        src = super.fetchPypi {
+          inherit pname version;
+          sha256 = "W2Gd1m1CY1k1oHDUDRGQoaMnqTNAUcc7wW0SFGjx7nI=";
+        };
+      };
     };
   };
 in { python37 = super.python37.override (pythonStack); }
