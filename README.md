@@ -29,6 +29,11 @@ Helper commands to be run everywhere.
 * `start-localstack` - run `localstack` instance thru `docker-compose`
 * `stop-localstack` - kill `localstack` instance thru `docker-compose`
 
+### Python stack
+To make things reusable and managable there are couple of `fp` helpers to make it possible.
+* [`functools`](https://docs.python.org/3/library/functools.html)
+* [`pampy`](https://github.com/santinic/pampy)
+
 ### AWS
 * to create bucket run `create-s3-bucket <your_bucket_name>`, i.e. `create-s3-bucket my-bucket`
 * to run infra stack run `stack-up <your_project>`, i.e. `stack-up infra/simple_lambda_python`

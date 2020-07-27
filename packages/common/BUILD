@@ -5,8 +5,11 @@ package(default_visibility = ["//visibility:public"])
 
 py_library(
   name = "main",
-  srcs = ["main.py"],
+  srcs = ["src/main.py"],
   deps = [
-    requirement("pulumi")
+    requirement("pulumi"),
+    requirement("pulumi_aws"),
+    requirement("pampy"),
+    requirement("boto3")
   ]
 )

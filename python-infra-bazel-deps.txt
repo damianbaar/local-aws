@@ -1,3 +1,12 @@
-pulumi
+# cloud
+boto3
 pulumi_aws>=2.13.1
+
+# tooling
+pulumi
+python-dotenv
 pylint
+rope
+
+# making python more sane
+pampy

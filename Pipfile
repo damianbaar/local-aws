@@ -9,6 +9,12 @@ verify_ssl = true
 pulumi = "*"
 pylint = "*"
 pulumi-aws = ">=2.13.1"
+python-dotenv = "*"
+pyfunctional = ">=1.4.1"
+pyPMatch = "*"
+pampy = "*"
+boto3 = "*"
+rope = "*"
 
 [requires]
 python_version = "3.7.7"

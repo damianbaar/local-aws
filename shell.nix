@@ -21,7 +21,7 @@ let
     ${pkgs.awscli}/bin/aws \
       --endpoint-url $endpoint \
       s3 mb s3://$1
-  ''; 
+  '';
 
   refresh-deps = pkgs.writeScriptBin "refresh-deps" ''
     ${pkgs.pipenv}/bin/pipenv install -r python-infra-bazel-deps.txt
@@ -44,17 +44,10 @@ let
     ${start-localstack}/bin/start-local-stack
   '';
 
-  pythonEnv = pkgs.python37.withPackages (ps: with ps; [
-    setuptools
-    wheel
-    pip
-    autopep8
-  ]);
+  pythonEnv =
+    pkgs.python37.withPackages (ps: with ps; [ setuptools wheel pip autopep8 ]);
 
-  unstable = with pkgs.nixpkgs-unstable.python37Packages; [
-    pip
-    venvShellHook
-  ];
+  unstable = with pkgs.nixpkgs-unstable.python37Packages; [ pip venvShellHook ];
 
   # TODO create pulumi new stack
   # TODO create pulumi config set aws:region
@@ -74,34 +67,35 @@ let
 in pkgs.mkShell rec {
   NAME = "playground";
   NIX_SHELL_NAME = "${NAME}#λ";
-  PIPENV_IGNORE_VIRTUALENVS=1;
+  PIPENV_IGNORE_VIRTUALENVS = 1;
 
   venvDir = "./.venv";
 
-  buildInputs = with pkgs; unstable ++ local-scripts ++ [
-    cowsay
-    hello
-    bashInteractive
-    nixfmt
+  buildInputs = with pkgs;
+    unstable ++ local-scripts ++ [
+      cowsay
+      hello
+      bashInteractive
+      nixfmt
 
-    nodejs-13_x
+      nodejs-13_x
 
-    dhall
-    dhall-json
+      dhall
+      dhall-json
 
-    pythonEnv
-    python37
-    awscli
+      pythonEnv
+      python37
+      awscli
 
-    pipenv
-    pkgs.nixpkgs-unstable.pulumi-bin
+      pipenv
+      pkgs.nixpkgs-unstable.pulumi-bin
 
-    jq
+      jq
 
-    bazel
-    bazel-watcher
-    bazel-buildtools
-  ];
+      bazel
+      bazel-watcher
+      bazel-buildtools
+    ];
 
   # INFO: to enable auto-completion in IDE
   postVenvCreation = ''
