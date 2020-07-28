@@ -59,3 +59,6 @@ When you enter in the directory, direnv will automatically trigger the script in
 ### TODO
 * introduce more meaningful python `requirements` files
 * to check https://pypi.org/project/pitfall/
+* getting issue related to 
+> !!! error: error using credentials to get account ID: error calling sts:GetCallerIdentity: InvalidClientTokenId: The security token included in the request is invalid.
+status code: 403, request id: ed1dd848-6aa0-41db-8a34-12c1d4fdf853
