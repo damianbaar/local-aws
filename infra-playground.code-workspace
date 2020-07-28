@@ -1,0 +1,10 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+  "settings": {
+    "nixfmt.path": "/nix/store/5brx4y0hqdh11z80njvdnyvrnq6m122f-nixfmt-0.4.0/bin/nixfmt"
+  }
+}
