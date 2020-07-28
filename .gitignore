@@ -7,3 +7,5 @@
 bazel-*
 .localstack/cache/**
 __pycache__
+dist
+

@@ -1,9 +1,9 @@
 # cloud
 boto3
 pulumi_aws>=2.13.1
+pulumi>=2.0.0,<3.0.0
 
 # tooling
-pulumi
 python-dotenv
 pylint
 rope

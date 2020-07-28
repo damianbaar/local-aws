@@ -16,7 +16,7 @@ let
   '';
 
   create-s3-bucket = pkgs.writeScriptBin "create-s3-bucket" ''
-    endpoint=$(${pkgs.jq}/bin/jq '.S3' ${pkgs.rootFolder}/.localstack/endpoints.json)
+    endpoint=$(${pkgs.jq}/bin/jq '.S3' ${pkgs.rootFolder}/.localstack/endpoints.json | tr -d '"')
 
     ${pkgs.awscli}/bin/aws \
       --endpoint-url $endpoint \
@@ -33,7 +33,7 @@ let
 
   run-stack = pkgs.writeScriptBin "stack-up" ''
     ${build-infra-artifact}/bin/build-infra-artifact $1
-    ${pkgs.pipenv}/bin/pipenv run pulumi up --cwd $1
+    ${pkgs.pulumi-latest}/bin/pulumi up --cwd $*
   '';
 
   run-pulumi = pkgs.writeScriptBin "deployer" ''
@@ -95,7 +95,8 @@ in pkgs.mkShell rec {
       awscli
 
       pipenv
-      pkgs.nixpkgs-unstable.pulumi-bin
+      # pkgs.nixpkgs-unstable.pulumi-bin
+      pulumi-latest
 
       jq
 

@@ -1,6 +1,6 @@
 encryptionsalt: v1:P/0dA8r4j7U=:v1:w7SjLhj0JMzJxz15:SOmBOmo1bTufN7Rkf4vkWW7HB3P9kg==
 config:
-  aws:region: eu-west-1
+  aws:region: us-west-2
   aws:access_key:
     secure: v1:JLkJ8nfyJhglkzfW:Bdw2mQ3rDEPTTaMB2lwCR2J0APM8+B0kz+lD
   aws:secret_key:

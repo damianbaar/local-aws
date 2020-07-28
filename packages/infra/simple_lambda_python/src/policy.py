@@ -1,7 +1,7 @@
 import pulumi
-from pulumi_aws import iam
+from pulumi_aws import iam, Provider
 
-def createPolicy():
+def createPolicy(provider: Provider):
   return iam.Role(
     resource_name='my-policy',
     assume_role_policy={

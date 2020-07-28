@@ -1,4 +1,4 @@
-POC to spinup `localstack` and some deployment tools (i.e. `aws-cdk`) - to have testable playground for infrustructure.
+POC to spinup `localstack` and `pulumi` - to have testable playground for infrustructure.
 
 ### Before start 
 #### Prerequisites
@@ -7,6 +7,7 @@ POC to spinup `localstack` and some deployment tools (i.e. `aws-cdk`) - to have 
 
 ### Why
 * [`nix`](https://gist.github.com/joepie91/9fdaf8244b0a83afcce204e6da127c7d)
+* `pulumi` - secret (any provider) and deploymet env config management
 
 ### Startup
 `localstack` is used to provide ability to test things without dependency on internet any any costs.
@@ -57,3 +58,4 @@ When you enter in the directory, direnv will automatically trigger the script in
 
 ### TODO
 * introduce more meaningful python `requirements` files
+* to check https://pypi.org/project/pitfall/
