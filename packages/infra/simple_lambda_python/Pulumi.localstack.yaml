@@ -3,7 +3,8 @@ config:
   aws:endpoints:
   - s3: http://localhost:4572
   - dynamodb: http://localhost:4569
-    iam: http://localhost:4593
+  - iam: http://localhost:4593
+  - apigateway: http://localhost:4567
   aws:region: us-west-1
   aws:skipCredentialsValidation: "true"
   aws:skipMetadataApiCheck: "true"

@@ -1,3 +1,0 @@
-([('main',
-   '/Users/damianbaar/workspaces/playground/python/http-playground/dist/main',
-   'EXECUTABLE')],)

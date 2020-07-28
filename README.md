@@ -17,6 +17,9 @@ POC to spinup `localstack` and `pulumi` - to have testable playground for infrus
 ## Commands
 Helper commands to be run everywhere.
 
+### Run without spawning a `nix-shell`
+* `nix-shell shell.nix --run 'stack-up packages/infra/simple_lambda_python --yes'`
+
 ### Environment initialization
 * to start all necessary processes for running local environment, go with `start-environment` 
 
@@ -59,6 +62,7 @@ When you enter in the directory, direnv will automatically trigger the script in
 ### TODO
 * introduce more meaningful python `requirements` files
 * to check https://pypi.org/project/pitfall/
-* getting issue related to 
+* nix in docker + https://code.visualstudio.com/docs/remote/remote-overview, https://github.com/microsoft/vscode-remote-try-node/blob/master/.devcontainer/Dockerfile
+* fixed - getting issue related to 
 > !!! error: error using credentials to get account ID: error calling sts:GetCallerIdentity: InvalidClientTokenId: The security token included in the request is invalid.
 status code: 403, request id: ed1dd848-6aa0-41db-8a34-12c1d4fdf853
