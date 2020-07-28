@@ -26,18 +26,17 @@ def make_config() -> Config:
     env = get_environment_config()
     return match(env,
                  EnvironmentDescriptor(
-                     CloudProvider.LOCAL.value, _, _, _, _, _, _),
-                 LocalstackConfig(
+                     CloudProvider.LOCAL.value, _, _, _, _, _),
+                 AWSConfig(
                      provider=env.provider,
                      stage=env.stage,
                      region=env.region,
                      access_key=env.access_key,
                      secret_key=env.secret_key,
-                     endpoints=env.endpoints_config
                  ),
 
                  EnvironmentDescriptor(
-                     CloudProvider.AWS.value, _, _, _, _, _, _),
+                     CloudProvider.AWS.value, _, _, _, _, _),
                  AWSConfig(
                      provider=env.provider,
                      stage=env.stage,

@@ -1,0 +1,9 @@
+encryptionsalt: v1:RgK18OCIuEg=:v1:e89keHQVAXtGnhrQ:4mnn/f5ET+rIt+/bPPCy4WPEIrxv+w==
+config:
+  aws:endpoints:
+    - s3: http://localhost:4572
+  aws:region: eu-west-1
+  aws:s3ForcePathStyle: "true"
+  aws:skipCredentialsValidation: "true"
+  aws:skipMetadataApiCheck: "true"
+  aws:skipRequestingAccountId: "true"

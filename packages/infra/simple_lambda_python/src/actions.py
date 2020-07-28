@@ -7,14 +7,13 @@ from configuration import Config, CloudProvider, LocalstackConfig, AWSConfig, ma
 from providers import prepareProvider
 
 
-def infraActions(provider: Provider):
-    bucket = s3.Bucket(resource_name='test-bucket')
+def infraActions():
+    config = make_config()
+    provider = prepareProvider(config)
+    bucket = s3.Bucket('my-bucket')
     # createPolicy(provider)
-    # pulumi.export('bucket_name',  bucket.id)
+    pulumi.export('bucket_name',  bucket.id)
 
-
-config = make_config()
-provider = prepareProvider(config)
 
 def runStack():
-    infraActions(provider)
+    infraActions()

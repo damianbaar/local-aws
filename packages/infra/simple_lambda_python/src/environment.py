@@ -9,10 +9,6 @@ from pulumi import Config
 # INFO / TODO: can be dynamically obtained from here
 # s3_regions = Session().get_available_regions('s3')
 
-def loadJSONFile(configToLoad):
-    return json.loads(configToLoad)
-
-
 class Region(Enum):
     US_WEST_1 = "us-west-1"
     US_EAST_1 = "us-east-1"
@@ -36,11 +32,10 @@ class CloudProvider(Enum):
 class EnvironmentDescriptor():
     provider: CloudProvider = CloudProvider.LOCAL
     stage: TargetEnvironment = TargetEnvironment.LOCAL
-    region: Region = ""
+    region: Region = Region.EU_EAST_1
     name: str = ""
     access_key: str = ""
     secret_key: str = ""
-    endpoints_config: json = None
 
 
 def read_pulumi_config() -> EnvironmentDescriptor:
@@ -54,7 +49,6 @@ def read_pulumi_config() -> EnvironmentDescriptor:
         name=moduleCfg.require('name'),
         access_key=awsCfg.get_secret('access_key'),
         secret_key=awsCfg.get_secret('secret_key'),
-        endpoints_config=loadJSONFile(moduleCfg.require('endpoints')),
     )
 
 

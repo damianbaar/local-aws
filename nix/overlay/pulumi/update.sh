@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 
-VERSION="2.7.1"
+VERSION="2.7.0"
 
 # Bash 3 compatible for Darwin
 plugins=(
     # https://github.com/pulumi/pulumi-aws/releases
-    "aws=2.13.1"
+    "aws=2.11.0"
     # https://github.com/pulumi/pulumi-gcp/releases
     "gcp=3.15.0"
     # https://github.com/pulumi/pulumi-random/releases
