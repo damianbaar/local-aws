@@ -1,8 +1,9 @@
 encryptionsalt: v1:V3OgEgwEw0k=:v1:c/wKoHnB2FoKT93y:i79PsAm1HJhXnV5jiCkeCPWeXmvjsw==
 config:
   aws:endpoints:
-    - s3: "http://localhost:4572"
-  # - dynamodb: http://localhost:4569
+  - s3: http://localhost:4572
+  - dynamodb: http://localhost:4569
+    iam: http://localhost:4593
   aws:region: us-west-1
   aws:skipCredentialsValidation: "true"
   aws:skipMetadataApiCheck: "true"

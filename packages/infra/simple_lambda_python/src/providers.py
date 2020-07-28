@@ -20,12 +20,7 @@ def getLocalStackProvider(config: LocalstackConfig):
                     access_key="fake",  # config.access_key,
                     secret_key="fake",  # config.secret_key,
                     region="eu-west-1",
-                    # profile="localstack",
-                    endpoints=[
-                        {
-                         's3': 'http://localhost:4572',
-                         }
-                    ])
+                    )
 
 def getAWSProvider(config: AWSConfig):
     return Provider('aws',

@@ -45,13 +45,17 @@ let
     ${start-localstack}/bin/start-local-stack
   '';
 
+  get-endpoint = pkgs.writeScriptBin "getEndpoint" ''
+    cat $ROOT_FOLDER/.localstack/endpoints.json | jq .$1 | tr -d '"'
+  '';
+
   build-infra-artifact = pkgs.writeScriptBin "build-infra-artifact" ''
     mkdir -p $1/dist
     ${pkgs.python37Packages.stickytape}/bin/stickytape $1/src/main.py > $1/dist/bundle.py
   '';
 
-  pythonEnv =
-    pkgs.python37.withPackages (ps: with ps; [ setuptools wheel pip autopep8 stickytape ]);
+  pythonEnv = pkgs.python37.withPackages
+    (ps: with ps; [ setuptools wheel pip autopep8 stickytape ]);
 
   unstable = with pkgs.nixpkgs-unstable.python37Packages; [ pip venvShellHook ];
 
@@ -69,6 +73,7 @@ let
     run-stack
     refresh-deps
     build-infra-artifact
+    get-endpoint
   ];
 
 in pkgs.mkShell rec {
@@ -95,7 +100,6 @@ in pkgs.mkShell rec {
       awscli
 
       pipenv
-      # pkgs.nixpkgs-unstable.pulumi-bin
       pulumi-latest
 
       jq

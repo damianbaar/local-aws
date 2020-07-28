@@ -15,9 +15,6 @@ pulumi config set aws:skipCredentialsValidation true
 pulumi config set aws:skipMetadataApiCheck true
 pulumi config set aws:skipRequestingAccountId true
 
-function getEndpoint() {
-  cat $ROOT_FOLDER/.localstack/endpoints.json | jq .$1 | tr -d '"'
-}
-
 pulumi config set --path aws:endpoints[0].s3 $(getEndpoint S3)
 pulumi config set --path aws:endpoints[1].dynamodb $(getEndpoint DynamoDB)
+pulumi config set --path aws:endpoints[1].iam $(getEndpoint IAM)

@@ -11,7 +11,7 @@ def infraActions():
     config = make_config()
     provider = prepareProvider(config)
     bucket = s3.Bucket('my-bucket')
-    # createPolicy(provider)
+    createPolicy(provider)
     pulumi.export('bucket_name',  bucket.id)
 
 
