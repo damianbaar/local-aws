@@ -9,6 +9,8 @@ let
   overlays = [ 
     passthrough 
     (import ./overlay/python.nix)
+    (import ./overlay/environment.nix)
+    (import ./overlay/global-scripts.nix)
   ];
 
   args = {
