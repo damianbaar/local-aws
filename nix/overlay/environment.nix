@@ -1,7 +1,7 @@
 self: super:
 let
   pythonEnv = super.python37.withPackages
-    (ps: with ps; [ setuptools wheel pip autopep8 stickytape ]);
+    (ps: with ps; [ setuptools wheel pip autopep8 stickytape pylint ]);
 
   unstable = with super.nixpkgs-unstable.python37Packages; [ pip venvShellHook ];
 in

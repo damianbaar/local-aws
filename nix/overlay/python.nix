@@ -39,5 +39,4 @@ let
   };
 in { 
   python37 = super.python37.override (pythonStack); 
-  pulumi-latest = super.callPackage ./pulumi {};
 }
