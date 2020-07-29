@@ -2,7 +2,4 @@ let
   pkgs = import ../nix {};
 in
   with pkgs;
-  {
-    inherit bazel;
-    inherit python;
-  }
+  environment.pkgs ++ global-scripts
