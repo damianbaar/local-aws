@@ -11,9 +11,9 @@
 
 	// Set *default* container specific settings.json values on container create.
 	"settings": { 
-    "terminal.integrated.shell.linux": "bash",
-    "terminal.integrated.shellArgs.linux": ["-l"]
-    // "terminal.integrated.shell.linux": "nix-shell",
+    // "terminal.integrated.shell.linux": "bash",
+    // "terminal.integrated.shellArgs.linux": ["-l"]
+    "terminal.integrated.shell.linux": "/home/vscode/.nix-profile/bin/nix-shell",
 	},
 
 	// Add the IDs of extensions you want installed when the container is created.
@@ -33,7 +33,7 @@
 	// "mounts": [ "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind" ],
   "mounts": [ 
     "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind",
-    "source=${localWorkspaceFolder}/.devcontainer,target=/devcontainer-data,type=bind,consistency=cached"
+    "source=${localWorkspaceFolder},target=/source,type=bind,consistency=cached"
    ],
 
 	// Uncomment to connect as a non-root user. See https://aka.ms/vscode-remote/containers/non-root.

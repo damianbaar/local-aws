@@ -33,15 +33,13 @@ RUN nix-channel --add https://nixos.org/channels/nixpkgs-19.09-darwin nixpkgs \
     && nix-channel --add https://nixos.org/channels/nixpkgs-unstable unstable \
     && nix-channel --update
 
-# Propagate UTF8
-# https://github.com/NixOS/nix/issues/599#issuecomment-153885553
-# The same is hapenning with stack2nix
-RUN nix-env -iA nixpkgs.glibcLocales \
-  unstable.bazel \
-  unstable.bash
+# WORKDIR /workspaces/http-playground
 
-# RUN mkdir /workspace
-WORKDIR /workspace
+RUN nix-env -iA nixpkgs.glibcLocales
+COPY --chown=vscode:vscode .devcontainer /home/vscode/.devcontainer
+COPY --chown=vscode:vscode ./nix /home/vscode/nix
+RUN ls -la /home/vscode
+RUN nix-env -f /home/vscode/.devcontainer/docker-deps.nix -i '.*' && nix-store --gc
 
 # < Nix context as a volume
 # We want to be able to define /nix/store as a volume
@@ -50,6 +48,3 @@ VOLUME ["/nix"]
 # COPY --chown=vscode:vscode .devcontainer/bash_profile /home/vscode/.profile
 COPY --chown=vscode:vscode .devcontainer/bash_profile /home/vscode/bash_profile_external
 RUN echo "source $HOME/bash_profile_external" >> /home/vscode/.bashrc
-# />
-
-# RUN nix-env -f nix/docker-deps.nix -i '.*' && nix-store --gc
