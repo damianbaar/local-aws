@@ -15,6 +15,7 @@ pampy = "*"
 boto3 = "*"
 rope = "*"
 PyInstaller = "*"
+common-types = {editable = true,path = "./packages/common/common_types"}
 
 [requires]
 python_version = "3.7.7"

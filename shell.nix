@@ -6,7 +6,7 @@ let
   '';
 
   # TODO
-  # python -m pip install packages/common/common_types --progress-bar ascii -r packages/common/common_types/requirements.txt
+  # python -m pipenv install -e packages/common/common_types -r packages/common/common_types/requirements.txt
   # stickytape  packages/infra/simple_lambda_python/src/main.py --add-python-path .venv/lib/python3.7/site-packages --add-python-path packages/common
 in pkgs.mkShell rec {
   NAME = "playground";

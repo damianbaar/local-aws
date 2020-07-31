@@ -2,6 +2,8 @@ load("@bazel_skylib//lib:paths.bzl", "paths")
 load("@bazel_skylib//lib:shell.bzl", "shell")
 load("@rules_python//python:defs.bzl", "py_binary")
 
+### TODO better would be to start from py_binary as it is carrying all necesary libraries
+
 # def _bundle_python(ctx):
 #     deps = ctx.attr.deps
 #     # deps = deps.map
