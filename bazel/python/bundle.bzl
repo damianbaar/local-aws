@@ -127,3 +127,21 @@ def generate_bundle_file(name, deps, tag, deps = [], extraArgs = []):
 #     ],
 #     # cmd = "echo 'pulumi up --cwd $(locations :main) "+ requirement("boto3") +")' > $@"
 #   )
+
+# source: https://github.com/bazelbuild/rules_nodejs/issues/373#issuecomment-444260151
+# TODO py_bin +
+# genrule(
+#     name = "client",
+#     outs = ["client.tar"],
+#     cmd = """
+#         ORIG_WD=$$PWD
+
+#         cd $(location :client_build).runfiles/
+#         ln -s nodejs_deps/node_modules ./ // this seem to be a quirk from react-scripts
+
+#         NODE_PATH=src $$ORIG_WD/$(location :client_build)
+#         tar -C build -cf $$ORIG_WD/$@ ./
+#     """,
+#     tools = [":client_build"],
+#     visibility = ["//visibility:public"],
+# )

@@ -59,6 +59,17 @@ To make things reusable and managable there are couple of `fp` helpers to make i
 * [`pampy`](https://github.com/santinic/pampy)
 
 ### Building
+`bazel` is handling `polyglot` monorepos, each `flavour` has different `ruleset`.
+
+#### Frontend Layer
+* to start an app `bazel run //packages/frontend/application/aws-tags-management:run`
+
+#### Python / App level Layer (WIP)
+* `bazel build //packages/infra/simple_lambda_python:main`
+
+#### Python / Infra level Layer (WIP)
+As I'm leveraging `pulumi` and `pulumi` has a custom `cli` runner, `libraries` has to be consumed in a bit different manner comparing to `py_library` or `py_binary`
+
 * `bazel build //infra/simple_lambda_python:main`
 
 ### Internals
@@ -74,3 +85,4 @@ To make things reusable and managable there are couple of `fp` helpers to make i
 ### TODO
 * introduce more meaningful python `requirements` files
 * to check https://pypi.org/project/pitfall/
+* create separate bazel workspaces

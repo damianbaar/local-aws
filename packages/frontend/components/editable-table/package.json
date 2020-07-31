@@ -1,0 +1,16 @@
+{
+  "name": "components",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "react": "^16.13.1",
+    "react-table": "^7.3.3",
+    "typescript": "^3.7.5"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "devDependencies": {
+    "@bazel/typescript": "^2.0.1"
+  }
+}

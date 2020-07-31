@@ -1,0 +1,23 @@
+  
+package(default_visibility = ["//visibility:public"])
+
+exports_files(["tsconfig.json", "package.json"])
+
+filegroup(
+    name = "node_modules",
+    srcs = glob(
+        include = [
+            "node_modules/typescript/**",
+            "node_modules/**/*.js",
+            "node_modules/**/*.d.ts",
+            "node_modules/**/*.json",
+            "node_modules/.bin/*",
+        ],
+        exclude = [
+            "node_modules/**/test/**",
+            "node_modules/**/docs/**",
+            "node_modules/**/**/**",
+            "node_modules/**/**",
+        ],
+    ),
+)

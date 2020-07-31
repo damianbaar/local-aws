@@ -1,11 +1,17 @@
-load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+workspace(
+    name = "http_playground",
+    managed_directories = {"@npm": ["node_modules"]},
+)
 
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+
+# BAZEL HELPERS
 http_archive(
     name = "bazel_skylib",
     url = "https://github.com/bazelbuild/bazel-skylib/releases/download/1.0.1/bazel-skylib-1.0.1.tar.gz",
     sha256 = "f1c8360c01fcf276778d3519394805dc2a71a64274a3a0908bc9edff7b5aebc8",
 )
+
 load("@bazel_skylib//:workspace.bzl", "bazel_skylib_workspace")
 bazel_skylib_workspace()
 
@@ -49,6 +55,7 @@ load("@rules_python//python:pip.bzl", "pip_repositories", "pip_import")
 
 pip_repositories()
 
+# PYTHON REPO
 pip_import(
     name = "infra_package_deps",
     requirements = "//:python-infra-bazel-deps.txt",
@@ -56,3 +63,22 @@ pip_import(
 
 load("@infra_package_deps//:requirements.bzl", _infra_install = "pip_install")
 _infra_install()
+
+# NODE / TYPESCRIPT
+load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+http_archive(
+    name = "build_bazel_rules_nodejs",
+    sha256 = "0f2de53628e848c1691e5729b515022f5a77369c76a09fbe55611e12731c90e3",
+    urls = ["https://github.com/bazelbuild/rules_nodejs/releases/download/2.0.1/rules_nodejs-2.0.1.tar.gz"],
+)
+
+
+# The npm_install rule runs yarn anytime the package.json or package-lock.json file changes.
+# It also extracts any Bazel rules distributed in an npm package.
+load("@build_bazel_rules_nodejs//:index.bzl", "npm_install")
+npm_install(
+    # Name this npm so that Bazel Label references look like @npm//package
+    name = "npm",
+    package_json = "//:package.json",
+    package_lock_json = "//:package-lock.json",
+)
