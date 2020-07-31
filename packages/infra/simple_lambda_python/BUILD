@@ -3,7 +3,7 @@ load("@infra_package_deps//:requirements.bzl", "requirement")
 
 package(default_visibility = ["//visibility:public"])
 
-py_library(
+py_binary(
   name = "main",
   srcs = glob(["src/*.py"]),
   deps = [

@@ -21,7 +21,8 @@ let
       --endpoint-url $endpoint \
       s3 mb s3://$1
   '';
-
+  # # python -m pip install -e packages/common/types --progress-bar ascii -r packages/common/types/requirements.txt
+# stickytape  packages/infra/simple_lambda_python/src/main.py --add-python-path .venv/lib/python3.7/site-packages --add-python-path packages/common
   refresh-deps = pkgs.writeScriptBin "refresh-deps" ''
     ${pkgs.pipenv}/bin/pipenv install -r python-infra-bazel-deps.txt
   '';

@@ -3,12 +3,15 @@ let
 
   passthrough = self: super: rec { 
     rootFolder = toString ../.; 
+    venvDir = "./.venv";
     nixpkgs-unstable = import sources.nixpkgs-unstable {};
   };
 
   overlays = [ 
     passthrough 
     (import ./overlay/python.nix)
+    (import ./overlay/node.nix)
+    (import ./overlay/darwin.nix)
     (import ./tools/overlay.nix)
     (import ./overlay/environment.nix)
     (import ./overlay/global-scripts.nix)

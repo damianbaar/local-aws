@@ -5,14 +5,18 @@ let
     ${pkgs.cowsay}/bin/cowsay "Welcome on my magic meadow"
   '';
 
+  # TODO
+  # python -m pip install packages/common/common_types --progress-bar ascii -r packages/common/common_types/requirements.txt
+  # stickytape  packages/infra/simple_lambda_python/src/main.py --add-python-path .venv/lib/python3.7/site-packages --add-python-path packages/common
 in pkgs.mkShell rec {
   NAME = "playground";
   NIX_SHELL_NAME = "${NAME}#λ";
   PIPENV_IGNORE_VIRTUALENVS = 1;
 
-  venvDir = "./.venv";
+  venvDir = pkgs.venvDir;
 
-  buildInputs = with pkgs; environment.pkgs ++ global-scripts;
+  buildInputs = with pkgs;
+    environment.pkgs ++ global-scripts ++ node.pkgs ++ darwin_env.pkgs;
 
   # INFO: to enable auto-completion in IDE
   postVenvCreation = ''

@@ -1,7 +1,7 @@
 self: super:
 let
   pythonEnv = super.python37.withPackages
-    (ps: with ps; [ setuptools wheel pip autopep8 stickytape pylint ]);
+    (ps: with ps; [ setuptools wheel autopep8 stickytape pylint ]);
 
   unstable = with super.nixpkgs-unstable.python37Packages; [ pip venvShellHook ];
 in
@@ -12,10 +12,10 @@ in
       hello
       bashInteractive
       nixfmt
-      nodejs-13_x
       dhall
       dhall-json
       pythonEnv
+      super.python37Packages.stickytape
       python37
       awscli
       pipenv
