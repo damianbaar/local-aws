@@ -4,6 +4,7 @@
   "python.autoComplete.extraPaths": [
     ".venv/lib"
   ],
+  "bazel.executable": "/nix/store/mp9jsqihzpb80qajkrqi3vwp6xkhj1j2-bazel-2.1.0/bin/bazel",
   "python.pythonPath": ".venv/bin/python3.7",
   "python.formatting.autopep8Path": "/nix/store/zjwwm39zk1n9d5mng3mb913pz433qprj-python3-3.7.6-env/bin/autopep8"
 }

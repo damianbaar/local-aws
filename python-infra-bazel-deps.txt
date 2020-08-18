@@ -1,12 +1,13 @@
 # cloud
 boto3
-pulumi_aws>=2.13.1
-pulumi>=2.0.0,<3.0.0
+# pulumi_aws>=2.13.1
+# pulumi>=2.0.0,<3.0.0
 
 # tooling
-python-dotenv
-pylint
-rope
+# python-dotenv
+# pylint
+# rope
 
 # making python more sane
-pampy
+# pampy
+

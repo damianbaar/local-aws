@@ -21,3 +21,10 @@ filegroup(
         ],
     ),
 )
+
+exports_files([
+    "tsconfig.json",
+    "es5.babelrc",
+    "package.json",
+    "rollup.config.js",
+])

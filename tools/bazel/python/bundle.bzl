@@ -9,7 +9,7 @@ load("@rules_python//python:defs.bzl", "py_binary")
 #     # deps = deps.map
 #     dd = depset(deps)
 
-#     runfiles = ctx.runfiles(files = ctx.files.data)
+#     [brunfiles = ctx.runfiles(files = ctx.files.data)
 #     for dep in ctx.attr.deps:
 #         print(dep.label)
 #         runfiles = runfiles.merge(dep[DefaultInfo].data_runfiles)
