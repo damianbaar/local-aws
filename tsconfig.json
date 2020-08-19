@@ -9,11 +9,13 @@
     // "allowJs": true, // TODO
     "esModuleInterop": true,
     "types": [],
+    "jsx": "react",
     "baseUrl": ".",
     "paths": {
       "@root/*": [
         "packages/*"
       ]
     }
-  }
+  },
+  "exclude": ["dist"]
 }
